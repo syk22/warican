@@ -1,5 +1,5 @@
 exports.up = function (knex) {
-  return knex.schema.createTable("group", function (table) {
+  return knex.schema.createTable("groups", function (table) {
     table.increments("group_id").primary().unique();
     table.string("group_name").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
@@ -8,9 +8,9 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.hasTable("group").then(function (exists) {
+  return knex.schema.hasTable("groups").then(function (exists) {
     if (exists) {
-      return knex.schema.dropTable("group");
+      return knex.schema.dropTable("groups");
     }
   });
 };

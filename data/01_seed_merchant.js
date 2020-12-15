@@ -6,7 +6,7 @@ Documenu.configure(process.env.DOCUMENU_APIKEY);
 
 exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex("restaurant")
+  return knex("merchant")
     .del()
     .then(async function () {
       const restaurantInfo = [];
@@ -16,7 +16,10 @@ exports.seed = function (knex) {
         .then((restaurants) => {
           // looping all 25 restaurant and pushing an object with id and name of restaurant in 'restaurantInfo'
           for (let { restaurant_id, restaurant_name } of restaurants.data) {
-            restaurantInfo.push({ restaurant_id, restaurant_name });
+            restaurantInfo.push({
+              restaurant_id: String(restaurant_id),
+              restaurant_name,
+            });
           }
         })
         .then(async (res) => {
@@ -24,7 +27,7 @@ exports.seed = function (knex) {
             // Send restaurant id as params and getting array of menu for the specific restaurant
             // each menu has 'menu_item_name', 'menu_item_pricing'
             const menu = await Documenu.Restaurants.getMenuItems(
-              restaurantInfo[i].restaurant_id,
+              Number(restaurantInfo[i].restaurant_id),
               {
                 size: 100,
               }
@@ -35,6 +38,6 @@ exports.seed = function (knex) {
         })
         .catch((err) => console.log(err));
       // Inserts seed entries
-      return knex("restaurant").insert(restaurantInfo);
+      return knex("merchant").insert(restaurantInfo);
     });
 };

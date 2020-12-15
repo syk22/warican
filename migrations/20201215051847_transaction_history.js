@@ -1,7 +1,9 @@
 exports.up = function (knex) {
   return knex.schema.createTable("transaction_history", function (table) {
     table.increments("transaction_id").primary().unique();
+    table.string("payment_currency");
     table.float("payment_amount");
+    table.string("payment_string");
     table.string("payment_status");
     table.timestamp("status_updated_at").defaultTo(knex.fn.now());
     table

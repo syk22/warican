@@ -5,7 +5,7 @@ exports.up = function (knex) {
       .integer("group_id")
       .notNullable()
       .references("group_id")
-      .inTable("group")
+      .inTable("groups")
       .onDelete("cascade");
     table
       .integer("customer_id")

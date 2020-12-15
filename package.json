@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "documenu": "^1.1.0",
     "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "knex": "^0.21.13",
     "pg": "^8.5.1",
     "react": "^17.0.1",

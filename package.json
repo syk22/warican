@@ -22,8 +22,9 @@
     "eject": "react-scripts eject",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
-    "make": "knex migrate:make",
-    "seed": "node ./data/import.js"
+    "make:migration": "knex migrate:make",
+    "seed": "knex seed:run",
+    "make:seed": "knex seed:make"
   },
   "eslintConfig": {
     "extends": [

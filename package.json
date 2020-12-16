@@ -2,6 +2,10 @@
   "name": "warican",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x",
+    "yarn": "1.x"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -26,12 +30,13 @@
     "stripe": "8.5.0"
   },
   "scripts": {
-    "server": "node server",
-    "begin": "react-scripts build && node server",
-    "start": "react-scripts start",
+    "start": "node server",
     "build": "react-scripts build",
+    "heroku-postbuild": "yarn migrate && yarn seed",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "re-start": "react-scripts start",
+    "server": "nodemon server",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "make:migration": "knex migrate:make",

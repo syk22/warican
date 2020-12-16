@@ -10,7 +10,7 @@ export default function GroupList(props){
          <h1>Group Setting</h1>
          {props.list.map((friend,i)=>(
              <>
-             {friend.name}
+             {friend.user_name}
              <ToggleButton
               value="check" 
               key={i}
@@ -21,12 +21,16 @@ export default function GroupList(props){
                   let newList = props.list;
                     newList[i].selected=!props.list[i].selected;
                     props.setList(newList);
+                 props.setMember(props.list.filter(friend => friend.selected===true).length)
              }}>
                  <CheckIcon />
              </ToggleButton>
          </>))}
-         <div>{`Number of members is ${props.list.filter(friend => friend.selected===true).length}`}</div> 
-         <button type="button" className="confirm" onClick={()=>{
+         <div>{`Number of members is ${props.member}`}</div> 
+         <button type="button" 
+         className="confirm" 
+         disabled={props.member === 0} 
+         onClick={()=>{
             props.setView("Payment");
         }}>confirm</button>
         </>

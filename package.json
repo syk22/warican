@@ -6,17 +6,29 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "documenu": "^1.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.13",
+    "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "make:migration": "knex migrate:make",
+    "seed": "knex seed:run",
+    "make:seed": "knex seed:make"
   },
+  "proxy": "http://localhost:3000/",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -34,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
   }
 }

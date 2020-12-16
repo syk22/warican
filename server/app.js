@@ -22,7 +22,7 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "jpy",
           product_data: {
-            name: "Big Banana",
+            name: "Fried Rice",
           },
           unit_amount: 2000,
         },
@@ -30,7 +30,7 @@ app.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "https://example.com/success",
+    success_url: "http://localhost:3000/successhi.html",
     cancel_url: "https://example.com/cancel",
   });
   res.json({ id: session.id });

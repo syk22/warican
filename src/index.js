@@ -4,17 +4,19 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import Success from "./components/Success.jsx";
+
 function Home() {
   return (
     <Router>
       <Switch>
-        {/* <Route path="/success.html">
+        <Route path="/successhi.html">
           <Success />
         </Route>
-        <Route path="/canceled.html">
+        {/* <Route path="/canceled.html">
           <Canceled />
         </Route> */}
-        <Route path="/">
+        <Route exact path="/">
           <App />
         </Route>
       </Switch>

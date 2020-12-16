@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "documenu": "^1.1.0",
     "dotenv": "^8.2.0",
@@ -17,10 +18,13 @@
     "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "stripe": "^8.129.0"
+    "stripe": "8.5.0"
   },
   "scripts": {
+    "server": "node server",
+    "begin": "react-scripts build && node server",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -31,7 +35,7 @@
     "seed": "knex seed:run",
     "make:seed": "knex seed:make"
   },
-  "proxy": "http://localhost:3000/",
+  "proxy": "http://localhost:9000/",
   "eslintConfig": {
     "extends": [
       "react-app",

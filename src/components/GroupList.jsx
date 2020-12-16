@@ -1,11 +1,14 @@
-import React from 'react';
-import CheckIcon from '@material-ui/icons/Check';
-import ToggleButton from '@material-ui/lab/ToggleButton';
+import React from "react";
+import CheckIcon from "@material-ui/icons/Check";
+import ToggleButton from "@material-ui/lab/ToggleButton";
 
-export default function GroupList(props){
-    console.log(props.list);
-    // const [ selected, setSelected ] = useState(false); 
-    return (
+export default function GroupList(props) {
+  console.log(props.list);
+  // const [ selected, setSelected ] = useState(false);
+  return (
+    <>
+      <h1>Group Setting</h1>
+      {props.list.map((friend, i) => (
         <>
          <h1>Group Setting</h1>
          {props.list.map((friend,i)=>(
@@ -34,6 +37,19 @@ export default function GroupList(props){
             props.setView("Payment");
         }}>confirm</button>
         </>
-    );
-};
-
+      ))}
+      <div>{`Number of members is ${
+        props.list.filter((friend) => friend.selected === true).length
+      }`}</div>
+      <button
+        type="button"
+        className="confirm"
+        onClick={() => {
+          props.setView("Payment");
+        }}
+      >
+        confirm
+      </button>
+    </>
+  );
+}

@@ -1,62 +1,96 @@
 const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-// const Stripe = require("stripe");
-const path = require("path");
-const knex = require("./knex");
-
-// TEST API KEY
-// const stripe = Stripe('pk_test_51HypyCK0ZQBlJQ9OBxfKChir8dKmX5fz0kxuji2hZkzyq7B2GLNd7pxxZimWQJ6uFPavwMcxn5BFnRiBoNTTmmBe00hZzWUcJB');
-// const elements = stripe.elements();
-
 const app = express();
+const { resolve } = require("path");
+const cors = require("cors");
+const knex = require("./knex");
+const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+require("dotenv").config();
+
+///////////// APP USE ////////////////
+app.use(express.static("./build"));
 app.use(cors());
+///////////// APP USE END ////////////////
 
-// Setup logger
-app.use(
-  morgan(
-    ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'
-  )
-);
+///////////// APP POST //////////////
+app.post("/create-checkout-session", async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: [
+      {
+        price_data: {
+          currency: "jpy",
+          product_data: {
+            name: "Fried Rice",
+          },
+          unit_amount: 2000,
+        },
+        quantity: 1,
+      },
+    ],
+    mode: "payment",
+    success_url: "http://localhost:3000/successhi.html",
+    cancel_url: "https://example.com/cancel",
+  });
+  res.json({ id: session.id });
+});
+/////////// APP POST END ////////////
 
-// Serve static assets
-app.use(express.static(path.resolve(__dirname, "..", "build")));
-
+/////////// APP GET /////////////////
 // get members
 // CAUTION -> now, only we can get group_id = 1
-app.use("/api/members", async (req, res) => {
-    try {
-        let members = await knex
-            .select("customer.customer_id", "user_name")
-            .from("customer")
-            .join("group_member", "customer.customer_id", "=", "group_member.customer_id")
-            .where("group_id", 1);
-        res.json(members);
-    } catch (err) {
-        console.error("Error loading members!");
-        console.error(err);
-        res.sendStatus(500);
-    }
+app.get("/api/members", async (req, res) => {
+  try {
+    let members = await knex
+      .select("customer.customer_id", "user_name")
+      .from("customer")
+      .join(
+        "group_member",
+        "customer.customer_id",
+        "=",
+        "group_member.customer_id"
+      )
+      .where("group_id", 1);
+    res.json(members);
+  } catch (err) {
+    console.error("Error loading members!");
+    console.error(err);
+    res.sendStatus(500);
+  }
 });
 
-// get recipt
+// get receipt
 // query-> ?id=(num)
 // CAUTION -> now, only we can get group_id = 1
-app.use("/api/receipts", async (req, res) => {
-    try {
-        let receipts = await knex
-            .select()
-            .from("receipt")
-            .where("group_id", 1);
-        if (req.query.id) {
-            receipts = receipts.find(element => element.receipt_id === Number(req.query.id));
-        }
-        res.json(receipts);
-    } catch (err) {
-        console.error("Error loading receipts!");
-        console.error(err);
-        res.sendStatus(500);
+app.get("/api/receipts", async (req, res) => {
+  try {
+    let receipts = await knex.select().from("receipt").where("group_id", 1);
+    if (req.query.id) {
+      receipts = receipts.find(
+        (element) => element.receipt_id === Number(req.query.id)
+      );
     }
+    res.json(receipts);
+  } catch (err) {
+    console.error("Error loading receipts!");
+    console.error(err);
+    res.sendStatus(500);
+  }
 });
+
+app.get("/", (req, res) => {
+  const path = resolve("./build" + "/index.html");
+  res.sendFile(path);
+});
+
+app.get("/config", async (req, res) => {
+  const price = await stripe.prices.retrieve(process.env.PRICE);
+
+  res.send({
+    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    unitAmount: price.unit_amount,
+    currency: price.currency,
+  });
+});
+//////////// APP GET END /////////////
 
 module.exports = app;

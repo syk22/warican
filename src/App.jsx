@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 import GroupList from "./components/GroupList.jsx";
-import Payment from './components/Payment.jsx';
+import Payment from "./components/Payment.jsx";
 import Check from "./components/Check.jsx";
 import axios from "axios";
 
+// Eliot - I suppose this will be the
 function App() {
   const nameList = [
     {name:"sayaka", selected: false}, 

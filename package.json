@@ -28,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "server": "nodemon server",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "make:migration": "knex migrate:make",

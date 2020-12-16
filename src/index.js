@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Checkout from './components/Checkout';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import App from './App';
+
 
 function App() {
   return (
@@ -23,3 +25,4 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+

@@ -11,11 +11,11 @@ module.exports = {
     },
     searchPath: "public",
     migrations: {
-      directory:  __dirname + "/migrations",
+      directory: __dirname + "/migrations",
       loadExtensions: [".js"],
     },
     seeds: {
-      directory:  __dirname + "/data",
+      directory: __dirname + "/seeds",
       loadExtensions: [".js"],
     },
   },
@@ -24,13 +24,14 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     searchPath: "public",
     migrations: {
-      directory:  __dirname + "/migrations",
+      directory: __dirname + "/migrations",
       loadExtensions: [".js"],
     },
     seeds: {
-      directory:  __dirname + "/seeds",
+      directory: __dirname + "/seeds",
       loadExtensions: [".js"],
-    },  },
+    },
+  },
   production: {
     client: "pg",
     connection: process.env.DATABASE_URL,

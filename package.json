@@ -63,7 +63,13 @@
     ]
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.6"
+    "husky": "^4.3.6",
+    "nodemon": "^2.0.6",
+    "pretty-quick": "^3.1.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

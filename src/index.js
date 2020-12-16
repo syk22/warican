@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Checkout from './components/Checkout';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import App from './App';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-
-function App() {
+function Home() {
   return (
     <Router>
       <Switch>
@@ -17,12 +15,12 @@ function App() {
           <Canceled />
         </Route>
         <Route path="/">
-          <Checkout />
+          <App />
         </Route>
       </Switch>
     </Router>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Home />, document.getElementById('root'));
 

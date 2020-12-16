@@ -8,12 +8,12 @@ function App() {
   return (
     <Router>
       <Switch>
-        {/* <Route path="/success.html">
+        <Route path="/success.html">
           <Success />
         </Route>
         <Route path="/canceled.html">
           <Canceled />
-        </Route> */}
+        </Route>
         <Route path="/">
           <Checkout />
         </Route>

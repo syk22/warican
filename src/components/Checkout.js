@@ -4,7 +4,7 @@ require("dotenv").config();
 
 
 console.log(process.env)
-const stripePromise = loadStripe(`${process.env.STRIPE_PUBLISHABLE_KEY}`);
+const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
 function Checkout() {
   const handleClick = async (event) => {

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import './App.css';
+import "./App.css";
 import GroupList from "./components/GroupList.jsx";
-import Payment from './components/Payment.jsx';
+import Payment from "./components/Payment.jsx";
 import Check from "./components/Check.jsx";
 
+// Eliot - I suppose this will be the
 function App() {
   const nameList = [
-    {name:"sayaka", selected: false, paid:"false"}, 
-    {name:"kaisei", selected: false, paid:"false"}, 
-    {name:"misho", selected: false, paid:"false"}
-    ];
-  const [ list , setList ] = useState(nameList);
+    { name: "sayaka", selected: false, paid: "false" },
+    { name: "kaisei", selected: false, paid: "false" },
+    { name: "misho", selected: false, paid: "false" },
+  ];
+  const [list, setList] = useState(nameList);
   const [currentView, setCurrentView] = useState("GroupList");
 
   // useEffect(() =>{
@@ -25,7 +26,7 @@ function App() {
         <GroupList list={list} setList={setList} setView={setCurrentView} />
       ) : (
         <>
-          <Payment setView={setCurrentView}/>
+          <Payment setView={setCurrentView} />
           <Check list={list} />
         </>
       )}

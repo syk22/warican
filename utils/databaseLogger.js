@@ -1,4 +1,4 @@
-const knex = require("../server/knex.js");
+const knex = require("./server/knex.js");
 
 async function getMerchant() {
   const merchant = await knex.select().table("merchant"); // array of object (each element is the merchant(restaurant) info)

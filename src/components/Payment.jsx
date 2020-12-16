@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 require("dotenv").config();
 
@@ -6,6 +6,7 @@ require("dotenv").config();
 const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
 export default function Payment(props){
+    const [payment, setPayment] = useState("");
     let total= props.receipts[1].balance;
 
     const handleClick = async (event) => {
@@ -37,7 +38,7 @@ export default function Payment(props){
             props.setView("GroupList");
         }}>Back</button>
         <input type="text" className="receipt" placeholder="input receipt id" ></input>
-        <div>{`一人あたま${Math.floor(total / props.member)}です`}</div>
+        <div>{`一人あたま${payment}です`}</div>
         <button type="button" className="payment" onClick={() => {
           handleClick();
         }}>Payment</button>

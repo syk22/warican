@@ -24,10 +24,13 @@
     "stripe": "^8.129.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server",
     "build": "react-scripts build",
+    "heroku-postbuild": "yarn migrate && yarn seed",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "re-start": "react-scripts start",
+    "server": "nodemon server",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "make:migration": "knex migrate:make",

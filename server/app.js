@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
 const { resolve } = require("path");
-const morgan = require("morgan");
 const cors = require("cors");
-const path = require("path");
 const knex = require("./knex");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();

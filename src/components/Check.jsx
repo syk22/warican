@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Check(props) {
 
-  const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
   const check = "✅";
   const uncheck = "☐";

@@ -7,7 +7,7 @@ const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();
 
 ///////////// APP USE ////////////////
-app.use(express.static("./build"));
+app.use(express.static(path.resolve(__dirname, "..", "build")));
 app.use(cors());
 ///////////// APP USE END ////////////////
 
@@ -77,9 +77,8 @@ app.get("/api/receipts", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  const path = resolve("./build" + "/index.html");
-  res.sendFile(path);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
 });
 
 app.get("/config", async (req, res) => {

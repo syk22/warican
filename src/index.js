@@ -11,9 +11,13 @@ function Home() {
   return (
     <Router>
       <Switch>
-        <Route path="/success" components={Success} />
-        <Route path="/cancel" components={Canceled} />
-        <Route exact path="/">
+        <Route path="/success" >
+          <Success/>
+        </Route>
+        <Route path="/canceled">
+          <Canceled />
+        </Route>
+        <Route path="/">
           <App />
         </Route>
       </Switch>

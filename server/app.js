@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { resolve } = require("path");
+const path = require("path");
 const cors = require("cors");
 const knex = require("./knex");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
@@ -93,3 +93,4 @@ app.get("/config", async (req, res) => {
 //////////// APP GET END /////////////
 
 module.exports = app;
+

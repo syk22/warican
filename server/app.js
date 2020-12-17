@@ -6,7 +6,7 @@ const knex = require("./knex");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();
-app.use(express.static((__dirname + "/build")));
+app.use(express.static(__dirname + "/build"));
 
 // utility for stripe to log fulfilled order
 const fulfillOrder = (session) => {
@@ -51,7 +51,7 @@ app.post(
   bodyParser.raw({ type: "application/json" }),
   (request, response) => {
     const payload = request.body; // everything
-    const sig = request.headers["stripe-signature"]; 
+    const sig = request.headers["stripe-signature"];
 
     let event;
 
@@ -117,20 +117,10 @@ app.get("/api/receipts", async (req, res) => {
   }
 });
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
-// });
-
-app.get("/config", async (req, res) => {
-  const price = await stripe.prices.retrieve(process.env.PRICE);
-
-  res.send({
-    publicKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    unitAmount: price.unit_amount,
-    currency: price.currency,
-  });
+app.get("/", (req, res) => {
+  res.send("Hello");
 });
+
 //////////// APP GET END /////////////
 
 module.exports = app;
-

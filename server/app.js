@@ -5,9 +5,10 @@ const cors = require("cors");
 const knex = require("./knex");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();
+app.use(express.static((__dirname + "/build")));
 
 ///////////// APP USE ////////////////
-app.use(express.static(path.resolve(__dirname, "..", "build")));
+// app.use(express.static(path.resolve(__dirname, "..", "build")));
 app.use(cors());
 ///////////// APP USE END ////////////////
 
@@ -77,9 +78,9 @@ app.get("/api/receipts", async (req, res) => {
   }
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+// });
 
 app.get("/config", async (req, res) => {
   const price = await stripe.prices.retrieve(process.env.PRICE);

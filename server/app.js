@@ -3,9 +3,19 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const knex = require("./knex");
+const bodyParser = require("body-parser");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();
 app.use(express.static((__dirname + "/build")));
+
+// utility for stripe to log fulfilled order
+const fulfillOrder = (session) => {
+  // TODO: fill me in
+  console.log("Fulfilling order", session);
+};
+
+// Find your endpoint's secret in your Dashboard's webhook settings
+const endpointSecret = "whsec_bhEntVL7sQvCfMjdGFmvbibAP98YfJVF";
 
 ///////////// APP USE ////////////////
 // app.use(express.static(path.resolve(__dirname, "..", "build")));
@@ -29,11 +39,40 @@ app.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:3000/successhi.html",
-    cancel_url: "https://example.com/cancel",
+    //Eliot-Ok for now, but will need to be dynamic when hosted on Heroku
+    success_url: "http://localhost:3000/success.html",
+    cancel_url: "https://localhost:3000/cancel.html",
   });
   res.json({ id: session.id });
 });
+
+app.post(
+  "/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  (request, response) => {
+    const payload = request.body; // everything
+    const sig = request.headers["stripe-signature"]; 
+
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    } catch (err) {
+      return response.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    // Handle the checkout.session.completed event
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+
+      // Fulfill the purchase...
+      fulfillOrder(session);
+    }
+
+    response.status(200);
+  }
+);
+
 /////////// APP POST END ////////////
 
 /////////// APP GET /////////////////

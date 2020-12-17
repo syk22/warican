@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.topbar {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #F23D6D;
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.logo {
+  height: 20px;
+  background: #F1F0F2;
+}
+
+.topbar-header {
+  cursor: pointer;
+}

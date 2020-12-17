@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import "../styles/Payment.css";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 require("dotenv").config();
 
 //const individualPayment = (合計金額どこからくるのですか？/numberOfPeople)
 const stripePromise = loadStripe(`${process.env.REACT_APP_PUBLISHABLE_KEY}`);
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 export default function Payment(props){
-    const [payment, setPayment] = useState("");
-    let total= props.receipts[1].balance;
+    const [payment, setPayment] = useState(0);
+    const [total, setTotal] = useState(0);
+
+    const classes = useStyles();
 
     const handleClick = async (event) => {
       // Get Stripe.js instance
@@ -16,7 +29,11 @@ export default function Payment(props){
       // Call your backend to create the Checkout Session
       const response = await fetch("/create-checkout-session", {
         method: "POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({unit_amount:payment})
       });
+      
+        // console.log(JSON.stringify({unit_amount:payment}))
   
       const session = await response.json();
   
@@ -33,17 +50,39 @@ export default function Payment(props){
     };
 
     return (
-        <>
-        <button type="button" className="back" onClick={()=>{
+        <div className={classes.root}>
+        <Button
+        type="button"
+        className="back"
+        variant="contained"
+        color="secondary"
+        onClick={()=>{
             props.setView("GroupList");
-        }}>Back</button>
-        <input type="text" className="receipt" placeholder="input receipt id" ></input>
-        <div>{`一人あたま${payment}です`}</div>
-        <button type="button" className="payment" onClick={() => {
+        }}>Back</Button><br></br>
+        <input type="text" className="receipt" placeholder="input receipt id" onChange={(e)=>{
+            console.log(e.target.value);
+            if(e.target.value === ""){
+                setTotal(0);
+                setPayment(0);
+            } else if(e.target.value <= 5 && e.target.value > 0) {
+                let sum = props.receipts[e.target.value - 1].balance;
+                setPayment(Math.floor(sum / props.member));
+                setTotal(sum);
+            } else {
+                window.alert("伝票番号を入れてください");
+            }
+        }}></input>
+        <div>{`一人あたま${payment}円です`}</div>
+        <Button
+        variant="contained"
+        color="secondary"
+        type="button"
+        className="payment"
+        onClick={() => {
           handleClick();
-        }}>Payment</button>
+        }}>Payment</Button>
         <div>{`お会計は${total}円になります`}</div>
         <div>{`Group member: ${props.member}`}</div>
-        </>
+        </div>
     );
 }

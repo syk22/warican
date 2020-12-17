@@ -2,23 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Success from "./components/Success.jsx";
 import Canceled from "./components/Canceled.jsx";
 
 function Home() {
   return (
-    <Router>
+    <main>
       <Switch>
-        <Route path="/success" components={Success} />
-        <Route path="/cancel" components={Canceled} />
-        <Route exact path="/">
-          <App />
-        </Route>
+        <Route path="/success" component={Success} />
+        <Route path="/cancel" component={Canceled} />
+        <Route path="/" component={App}/>
       </Switch>
-    </Router>
+      </main>
   );
 }
 
-ReactDOM.render(<Home />, document.getElementById("root"));
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Home />
+  </BrowserRouter>,
+  document.getElementById("root")
+);

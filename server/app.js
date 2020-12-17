@@ -41,8 +41,8 @@ app.post("/create-checkout-session", async (req, res) => {
     ],
     mode: "payment",
     //Eliot-Ok for now, but will need to be dynamic when hosted on Heroku
-    success_url: "https://warican.herokuapp.com/success",
-    cancel_url: "https://warican.herokuapp.com/cancel",
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/cancel",
   });
   res.json({ id: session.id });
 });

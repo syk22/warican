@@ -5,17 +5,14 @@ import App from "./App";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Success from "./components/Success.jsx";
+import Canceled from "./components/Canceled.jsx";
 
 function Home() {
   return (
     <Router>
       <Switch>
-        <Route path="/successhi.html">
-          <Success />
-        </Route>
-        {/* <Route path="/canceled.html">
-          <Canceled />
-        </Route> */}
+        <Route path="/success" components={Success} />
+        <Route path="/cancel" components={Canceled} />
         <Route exact path="/">
           <App />
         </Route>

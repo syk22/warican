@@ -82,8 +82,9 @@ export default function GroupList(props) {
   // console.log(props.list);
   // const [ selected, setSelected ] = useState(false);
   return (
-    <>
-    <h1 className="setting" >Group Setting</h1>
+    <div className="setting">
+      <a href="/"><img src="/static/images/warican_flower.png" alt="warican-flowerer" className="logo"/></a>
+      <div>一緒に行くメンバーを選んでね</div>
     <div className={classes.paper}>
       {props.list.map((friend,i) => (
       <Paper className={classes.paper} key={i}>
@@ -94,7 +95,6 @@ export default function GroupList(props) {
           <Grid item xs>
             <Typography gutterBottom variant="subtitle1">
               {friend.user_name}
-              {console.log(avatarImg[i])}
             </Typography>
           </Grid>
           <Grid>
@@ -115,7 +115,7 @@ export default function GroupList(props) {
       </Paper>))}
     </div>
 
-    <div>{`Number of members is ${props.member}`}</div> 
+    {/* <div>{`Number of members is ${props.member}`}</div>  */}
     <Button
       variant="contained"
       size="large"
@@ -133,6 +133,6 @@ export default function GroupList(props) {
         onClick={()=>{
             props.setView("Payment");
         }}>confirm</Button> */}
-        </>
+        </div>
   );
 }

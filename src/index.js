@@ -9,11 +9,13 @@ import Canceled from "./components/Canceled.jsx";
 
 function Home() {
   return (
+    <main>
       <Switch>
         <Route path="/success" component={Success} />
-        <Route path="/canceled" component={Canceled} />
+        <Route path="/cancel" component={Canceled} />
         <Route path="/" component={App}/>
       </Switch>
+      </main>
   );
 }
 

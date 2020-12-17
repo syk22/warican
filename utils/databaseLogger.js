@@ -41,7 +41,7 @@ async function getGroups() {
 /*Uncomment the one you want to log*/
 
 // getMerchant();
-getMenuOfRestaurant();
+// getMenuOfRestaurant();
 // getReceipt();
 // getOrderOfReceipt();
 // getCustomer();

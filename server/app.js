@@ -20,6 +20,7 @@ const endpointSecret = "whsec_bhEntVL7sQvCfMjdGFmvbibAP98YfJVF";
 ///////////// APP USE ////////////////
 // app.use(express.static(path.resolve(__dirname, "..", "build")));
 app.use(cors());
+app.use(express.json());
 ///////////// APP USE END ////////////////
 
 ///////////// APP POST //////////////
@@ -33,7 +34,7 @@ app.post("/create-checkout-session", async (req, res) => {
           product_data: {
             name: "Fried Rice",
           },
-          unit_amount: 2000,
+          unit_amount: req.body.unit_amount,
         },
         quantity: 1,
       },

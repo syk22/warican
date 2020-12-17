@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import "../styles/Payment.css";
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, makeStyles, Box, Paper, createMuiTheme } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Checkbox from '@material-ui/core/Checkbox';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+
 require("dotenv").config();
 
 //const individualPayment = (合計金額どこからくるのですか？/numberOfPeople)
@@ -50,7 +55,8 @@ export default function Payment(props){
     };
 
     return (
-        <div className={classes.root}>
+        <div id="payment" className={classes.root}>
+        <div><img src="/static/images/warican_flower.png" alt="warican-flowerer" className="logo"/></div>
         <Button
         type="button"
         className="back"

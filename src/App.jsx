@@ -40,7 +40,12 @@ function App() {
   return (
     <div className="App">
       <div className="topbar">
-      <a href="/"><img src="/static/images/warican_flower.png" alt="warican-flowerer" className="logo"/></a>
+      {/* <a href="/"><img src="/static/images/warican_flower.png" alt="warican-flowerer" className="logo"/></a> */}
+      {currentView === "GroupList" ? (
+        <div>Group Setting</div>
+      ) : (
+        <div>Payment</div>
+      )}
       </div>
       {currentView === "GroupList" ? (
         <GroupList 

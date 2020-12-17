@@ -22,7 +22,7 @@ const endpointSecret = "whsec_bhEntVL7sQvCfMjdGFmvbibAP98YfJVF";
 app.use(cors());
 app.use(express.json());
 ///////////// APP USE END ////////////////
-
+ 
 ///////////// APP POST //////////////
 app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({

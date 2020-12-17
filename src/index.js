@@ -11,10 +11,10 @@ function Home() {
   return (
     <Router>
       <Switch>
-        <Route path="https://warican.herokuapp.com/success.html">
+        <Route path="/success">
           <Success />
         </Route>
-        <Route path="https://warican.herokuapp.com/cancel.html">
+        <Route path="/cancel">
           <Canceled />
         </Route>
         <Route exact path="/">

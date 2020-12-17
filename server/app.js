@@ -117,9 +117,9 @@ app.get("/api/receipts", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
+// });
 
 //////////// APP GET END /////////////
 

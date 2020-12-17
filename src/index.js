@@ -17,7 +17,7 @@ function Home() {
         <Route path="/canceled.html">
           <Canceled />
         </Route>
-        <Route path="https://warican.herokuapp.com/">
+        <Route path="/">
           <App />
         </Route>
       </Switch>

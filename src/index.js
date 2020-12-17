@@ -11,18 +11,17 @@ function Home() {
   return (
     <Router>
       <Switch>
-        <Route path="/success" >
-          <Success/>
-        </Route>
-        <Route path="/canceled">
-          <Canceled />
-        </Route>
-        <Route path="/">
-          <App />
-        </Route>
+        <Route path="/success" component={Success} />
+        <Route path="/canceled" component={Canceled} />
+        <Route path="/" />
       </Switch>
     </Router>
   );
 }
 
-ReactDOM.render(<Home />, document.getElementById("root"));
+ReactDOM.render(
+  <BrowserRouter>
+    <Home />
+  </BrowserRouter>,
+  document.getElementById("root")
+);

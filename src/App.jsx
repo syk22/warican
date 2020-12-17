@@ -39,6 +39,9 @@ function App() {
   console.log(receipts);
   return (
     <div className="App">
+      <div className="topbar">
+      <a href="/"><img src="/static/images/warican_flower.png" alt="warican-flowerer" className="logo"/></a>
+      </div>
       {currentView === "GroupList" ? (
         <GroupList 
         list={list} 

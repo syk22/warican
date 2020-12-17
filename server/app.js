@@ -117,7 +117,7 @@ app.get("/api/receipts", async (req, res) => {
   }
 });
 
-app.get("https://warican.herokuapp.com/", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/build" + "/index.html");
 });
 

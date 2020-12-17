@@ -17,7 +17,7 @@ function Home() {
         <Route path="/canceled.html">
           <Canceled />
         </Route>
-        <Route exact path="/">
+        <Route path="/">
           <App />
         </Route>
       </Switch>

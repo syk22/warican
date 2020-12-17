@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const path = require("path");
+// const path = require("path");
 const cors = require("cors");
 const knex = require("./knex");
 const bodyParser = require("body-parser");

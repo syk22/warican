@@ -6,8 +6,7 @@ const knex = require("./knex");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 require("dotenv").config();
-// app.use(express.static(__dirname + "/build"));
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(express.static(__dirname + "../build"));
 
 // utility for stripe to log fulfilled order
 const fulfillOrder = (session) => {
@@ -119,7 +118,7 @@ app.get("/api/receipts", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+  res.sendFile(__dirname + "../build" + "/index.html");
 });
 
 //////////// APP GET END /////////////

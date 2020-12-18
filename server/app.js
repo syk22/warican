@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 ///////////// APP USE END ////////////////
  
-///////////// APP POST //////////////
+///////////// APP POST ////////////// 
 app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

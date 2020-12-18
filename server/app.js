@@ -22,8 +22,8 @@ const endpointSecret = "whsec_bhEntVL7sQvCfMjdGFmvbibAP98YfJVF";
 app.use(cors());
 app.use(express.json());
 ///////////// APP USE END ////////////////
- 
-///////////// APP POST ////////////// 
+
+///////////// APP POST //////////////
 app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -32,7 +32,10 @@ app.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "jpy",
           product_data: {
-            name: "Fried Rice",
+            name: "チャーハン(Fried Rice)",
+            images: [
+              "https://www.balmuda.com/jp/gohan/img/recipes/007/mobile/main.jpg",
+            ],
           },
           unit_amount: req.body.unit_amount,
         },
@@ -41,8 +44,8 @@ app.post("/create-checkout-session", async (req, res) => {
     ],
     mode: "payment",
     //Eliot-Ok for now, but will need to be dynamic when hosted on Heroku
-    success_url: "https://review-warican.herokuapp.com/success",
-    cancel_url: "https://review-warican.herokuapp.com/cancel",
+    success_url: "https://warican.herokuapp.com/success",
+    cancel_url: "https://warican.herokuapp.com/cancel",
   });
   res.json({ id: session.id });
 });

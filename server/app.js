@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 ///////////// APP USE END ////////////////
  
-///////////// APP POST //////////////
+///////////// APP POST ////////////// 
 app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -41,8 +41,8 @@ app.post("/create-checkout-session", async (req, res) => {
     ],
     mode: "payment",
     //Eliot-Ok for now, but will need to be dynamic when hosted on Heroku
-    success_url: "https://warican-new.herokuapp.com/success",
-    cancel_url: "https://warican-new.herokuapp.com/cancel",
+    success_url: "https://review-warican.herokuapp.com/success",
+    cancel_url: "https://review-warican.herokuapp.com/cancel",
   });
   res.json({ id: session.id });
 });
@@ -121,6 +121,9 @@ app.get("/api/receipts", async (req, res) => {
 // app.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 // });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
+});
 
 //////////// APP GET END /////////////
 

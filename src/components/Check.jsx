@@ -70,18 +70,27 @@ export default function Check(props){
     // return friend.selected===true}).map(friend=>{
     // return <div>{friend.user_name}</div>})    
     const presentMembers = 
-     props.list.filter(friend => {
+      props.list.filter(friend => {
         return friend.selected===true}).map(friend=>{
-        return friend.user_name});    
+        return friend.user_name});
     
-    console.log(presentMembers);
+    const avatarMatch = [];
+    presentMembers.forEach(element => {
+      for (const i of avatarImg) {
+        if (i.indexOf(element) >= 0) {
+          avatarMatch.push(i)
+        }
+      }
+    });
+    
+    // console.log(presentMembers);
     return (
         <>
         {presentMembers.map((friend,i) => (
       <Paper className={classes.paper} key={i}>
         <Grid container spacing={2}>
           <Grid item>
-              <Avatar alt={friend} src={avatarImg[i]}  className={classes.small} /> 
+              <Avatar alt={friend} src={avatarMatch[i]}  className={classes.small} /> 
           </Grid>
           <Grid item xs>
             <Typography gutterBottom variant="subtitle1">

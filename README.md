@@ -27,7 +27,7 @@ Using Warican on the smartphone, users can easily split the bill of the meal the
 First, the users set up a group by clicking on the icons of the people they are with.<br><br>
 <p align="center"><img src="images/waricanGroupSetting.png" width= "200px"></p><br>
 Click on the confirm button.<br><br>
-<p align="center"><img src="images/waricanGroupSetting2.png" width="200px"></p><br>
+<p align="center"><img src="images/WaricanGroupSetting2.png" width="200px"></p><br>
 The users enter the id of the bill the restaraunt issues. When they do, they see the amount each of them needs to pay and also the total amount.<br><br>
 <p align="center"><img src="images/waricanCalculation.png" width="200px"></p><br>
 Hit the payment button to jump to a payment page and enter email address and credit card information to pay.<br><br>
